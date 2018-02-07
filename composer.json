@@ -1,0 +1,27 @@
+{
+  "name": "swoole-libs/connection-pool",
+  "type": "library",
+  "description": "a simple connection pool library of the php. base on swoole",
+  "keywords": ["library","connection-pool"],
+  "homepage": "http://github.com/swoole-libs/connection-pool",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "inhere",
+      "email": "in.798@qq.com",
+      "homepage": "http://www.yzone.net/"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "inhere/resource-pool": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "SwooleLib\\Pool\\" : "src/"
+    }
+  },
+  "suggest": {
+    "inhere/simple-print-tool": "Very lightweight data printing tools"
+  }
+}
