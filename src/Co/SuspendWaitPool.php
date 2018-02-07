@@ -6,16 +6,17 @@
  * Time: 10:55
  */
 
-namespace SwooleLib\Pool;
+namespace SwooleLib\Pool\Co;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Coroutine;
 
 /**
- * Class ResourcePool - by Coroutine implement
- * @package Inhere\Pool
+ * Class ResourcePool
+ * - wait by coroutine switch. please see @link https://wiki.swoole.com/wiki/page/773.html
+ * @package SwooleLib\Pool\Co
  */
-abstract class CoSuspendPool extends AbstractPool
+abstract class SuspendWaitPool extends AbstractPool
 {
     /**
      * @var \SplQueue
@@ -33,8 +34,6 @@ abstract class CoSuspendPool extends AbstractPool
         $this->waitingQueue = new \SplQueue();
 
         parent::init();
-
-        $this->prepare($this->getInitSize());
     }
 
     /**

@@ -6,16 +6,16 @@
  * Time: 15:11
  */
 
-namespace SwooleLib\Pool\MySQL;
+namespace SwooleLib\Pool\Co\MySQL;
 
-use Inhere\Pool\Swoole\CoSleepPool;
 use Swoole\Coroutine\MySQL;
+use SwooleLib\Pool\Co\SleepWaitPool;
 
 /**
  * Class CoMySQLPool2
- * @package SwooleLib\Pool\MySQL
+ * @package SwooleLib\Pool\Co\MySQL
  */
-class CoMySQLPool2 extends CoSleepPool
+class MySQLPool2 extends SleepWaitPool
 {
     /**
      * @var array
@@ -56,5 +56,15 @@ class CoMySQLPool2 extends CoSleepPool
     public function destroy($resource)
     {
 //        unset($resource);
+    }
+
+    /**
+     * 验证资源(eg. db connection)有效性
+     * @param mixed $obj
+     * @return bool
+     */
+    protected function validate($obj): bool
+    {
+        // TODO: Implement validate() method.
     }
 }

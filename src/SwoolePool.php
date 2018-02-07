@@ -18,11 +18,6 @@ use Swoole\Timer;
 abstract class SwoolePool extends AbstractPool
 {
     /**
-     * @var int The max free waiting time(minutes) the free resource - 资源最大空闲时间
-     */
-    protected $freeTimeout = 5;
-
-    /**
      * @var int
      */
     protected $checkInterval = 5;

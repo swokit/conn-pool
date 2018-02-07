@@ -6,29 +6,23 @@
  * Time: 10:55
  */
 
-namespace SwooleLib\Pool;
+namespace SwooleLib\Pool\Co;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Coroutine;
 
 /**
- * Class ResourcePool - by Coroutine implement
- * @package Inhere\Pool
+ * Class ResourcePool
+ * - wait by coroutine sleep. please see @link https://wiki.swoole.com/wiki/page/784.html
+ * @package SwooleLib\Pool\Co
  */
-abstract class CoSleepPool extends AbstractPool
+abstract class SleepWaitPool extends AbstractPool
 {
     /**
      * check Interval time(ms)
      * @var int
      */
     protected $checkInterval = 20;
-
-    protected function init()
-    {
-        parent::init();
-
-        $this->prepare($this->getInitSize());
-    }
 
     /**
      * 等待并返回可用资源
@@ -37,7 +31,7 @@ abstract class CoSleepPool extends AbstractPool
     protected function wait()
     {
         $timer = 0;
-        $timeout = $this->getTimeout();
+        $timeout = $this->getMaxWait();
         $interval = $this->checkInterval;
         $intervalSecond = $this->checkInterval / 1000;
 
@@ -48,10 +42,10 @@ abstract class CoSleepPool extends AbstractPool
             }
 
             $timer += $interval;
-            // 无空闲资源可用， 挂起协程
+            // 无空闲资源可用， 进入等待状态
             Coroutine::sleep($intervalSecond);
         }
 
-        throw new \RuntimeException("Waiting timeout($timeout ms) for get resource.");
+        throw new \RuntimeException("No resources available. Waiting timeout($timeout ms) for get resource.");
     }
 }

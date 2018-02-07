@@ -6,16 +6,16 @@
  * Time: 15:11
  */
 
-namespace SwooleLib\Pool\Redis;
+namespace SwooleLib\Pool\Co\Redis;
 
-use SwooleLib\Pool\CoSuspendPool;
+use SwooleLib\Pool\Co\SuspendWaitPool;
 use Swoole\Coroutine\Redis;
 
 /**
  * Class CoRedisPool
- * @package SwooleLib\Pool\Redis
+ * @package SwooleLib\Pool\Co\Redis
  */
-class CoRedisPool extends CoSuspendPool
+class RedisPool extends SuspendWaitPool
 {
     /**
      * 创建新的资源实例
@@ -24,13 +24,10 @@ class CoRedisPool extends CoSuspendPool
     public function create()
     {
         $rds = new Redis();
-
         // debug('coId:' . Coroutine::id() . ' will create new redis connection');
-
         $rds->connect('redis', 6379);
 
         // debug('coId:' . Coroutine::id() . ' a new redis connection created');
-
         return $rds;
     }
 
@@ -42,5 +39,15 @@ class CoRedisPool extends CoSuspendPool
     public function destroy($resource)
     {
         // unset($resource);
+    }
+
+    /**
+     * 验证资源(eg. db connection)有效性
+     * @param mixed $obj
+     * @return bool
+     */
+    protected function validate($obj): bool
+    {
+        // TODO: Implement validate() method.
     }
 }
