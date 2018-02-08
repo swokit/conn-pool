@@ -18,7 +18,7 @@ use Swoole\Timer;
 abstract class SwoolePool extends AbstractPool
 {
     /**
-     * @var int
+     * @var int (unit: seconds)
      */
     protected $checkInterval = 5;
 
@@ -30,11 +30,20 @@ abstract class SwoolePool extends AbstractPool
     /**
      * pool checker
      */
-    public function poolChecker()
+    public function initTimers()
     {
         // 空闲时间超时检查
-        Timer::tick($this->checkInterval * 1000, function () {
+        $this->timers[] = Timer::tick($this->checkInterval * 1000, function () {
 
         });
+    }
+
+    public function clear()
+    {
+        parent::clear();
+
+        foreach ($this->timers as $timerId) {
+            Timer::clear($timerId);
+        }
     }
 }

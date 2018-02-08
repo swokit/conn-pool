@@ -31,7 +31,7 @@ abstract class SleepWaitPool extends AbstractPool
     protected function wait()
     {
         $timer = 0;
-        $timeout = $this->getMaxWait();
+        $timeout = $this->getWaitTimeout();
         $interval = $this->checkInterval;
         $intervalSecond = $this->checkInterval / 1000;
 
