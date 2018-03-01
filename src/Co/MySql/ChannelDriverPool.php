@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: inhere
- * Date: 2017-09-08
- * Time: 15:11
+ * Date: 2018/3/1
+ * Time: 下午5:23
  */
 
 namespace SwooleLib\Pool\Co\MySQL;
 
-use Swoole\Coroutine\MySQL;
-use SwooleLib\Pool\Co\SuspendWaitPool;
+use SwooleLib\Pool\Co\ChannelWaitPool;
+use Swoole\Coroutine\Mysql;
 
 /**
- * Class CoMySQLPool
+ * Class ChannelDriverPool
  * @package SwooleLib\Pool\Co\MySQL
  */
-class MySQLPool extends SuspendWaitPool
+class ChannelDriverPool extends ChannelWaitPool
 {
     /**
      * @var array
@@ -33,17 +33,23 @@ class MySQLPool extends SuspendWaitPool
     /**
      * 创建新的资源实例
      * @return mixed
+     * @throws \Exception
      */
     public function create()
     {
-        $conf = $this->options['db1'];
+        $count = \count($this->options);
+
+        if ($count === 1) {
+            $config = \array_values($this->options)[0];
+        } else {
+            $index = \random_int(0, $count - 1);
+            $config = \array_values($this->options)[$index];
+        }
+
         $db = new MySQL();
+        $db->connect($config);
 
-        // debug('coId:' . Coroutine::id() . ' will create new db connection');
-
-        $db->connect($conf);
-
-        // debug('coId:' . Coroutine::id() . ' a new db connection created');
+        parent::create();
 
         return $db;
     }
@@ -55,7 +61,7 @@ class MySQLPool extends SuspendWaitPool
      */
     public function destroy($resource)
     {
-        // unset($resource);
+        // TODO: Implement destroy() method.
     }
 
     /**
@@ -65,6 +71,6 @@ class MySQLPool extends SuspendWaitPool
      */
     protected function validate($obj): bool
     {
-        $obj->query('SELECT 1');
+        // TODO: Implement validate() method.
     }
 }

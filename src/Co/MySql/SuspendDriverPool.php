@@ -9,13 +9,13 @@
 namespace SwooleLib\Pool\Co\MySQL;
 
 use Swoole\Coroutine\MySQL;
-use SwooleLib\Pool\Co\SleepWaitPool;
+use SwooleLib\Pool\Co\SuspendWaitPool;
 
 /**
- * Class CoMySQLPool2
+ * Class CoMySQLPool
  * @package SwooleLib\Pool\Co\MySQL
  */
-class MySQLPool2 extends SleepWaitPool
+class SuspendDriverPool extends SuspendWaitPool
 {
     /**
      * @var array
@@ -33,17 +33,21 @@ class MySQLPool2 extends SleepWaitPool
     /**
      * 创建新的资源实例
      * @return mixed
+     * @throws \Exception
      */
     public function create()
     {
-        $conf = $this->options['db1'];
+        $count = \count($this->options);
+
+        if ($count === 1) {
+            $config = \array_values($this->options)[0];
+        } else {
+            $index = \random_int(0, $count - 1);
+            $config = \array_values($this->options)[$index];
+        }
+
         $db = new MySQL();
-
-        // debug('coId:' . Coroutine::id() . ' will create new db connection');
-
-        $db->connect($conf);
-
-        // debug('coId:' . Coroutine::id() . ' a new db connection created');
+        $db->connect($config);
 
         return $db;
     }
@@ -55,7 +59,7 @@ class MySQLPool2 extends SleepWaitPool
      */
     public function destroy($resource)
     {
-//        unset($resource);
+        // unset($resource);
     }
 
     /**
@@ -65,6 +69,6 @@ class MySQLPool2 extends SleepWaitPool
      */
     protected function validate($obj): bool
     {
-        // TODO: Implement validate() method.
+        $obj->query('SELECT 1');
     }
 }
