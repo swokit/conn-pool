@@ -6,7 +6,7 @@
 
 ## 项目地址
 
-- **github** https://github.com/swoole-libs/php-connection-pool.git
+- **github** https://github.com/swoole-kit/php-connection-pool.git
 
 **注意：**
 
@@ -19,7 +19,7 @@
 编辑 `composer.json`，在 `require` 添加
 
 ```
-"swoole-libs/connection-pool": "dev-master"
+"swoole-kit/connection-pool": "dev-master"
 ```
 
 然后执行: `composer update`

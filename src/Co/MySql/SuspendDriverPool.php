@@ -6,14 +6,14 @@
  * Time: 15:11
  */
 
-namespace SwooleLib\Pool\Co\MySQL;
+namespace SwooleKit\Pool\Co\MySQL;
 
 use Swoole\Coroutine\MySQL;
-use SwooleLib\Pool\Co\SuspendWaitPool;
+use SwooleKit\Pool\Co\SuspendWaitPool;
 
 /**
  * Class CoMySQLPool
- * @package SwooleLib\Pool\Co\MySQL
+ * @package SwooleKit\Pool\Co\MySQL
  */
 class SuspendDriverPool extends SuspendWaitPool
 {

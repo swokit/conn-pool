@@ -20,7 +20,7 @@ $config = [
     ]
 ];
 
-$pool = new \SwooleLib\Pool\Co\MySQL\SleepDriverPool($config);
+$pool = new \SwooleKit\Pool\Co\MySQL\SleepDriverPool($config);
 
 \Swoole\Coroutine::create(function () use ($pool) {
     $pool->initPool();

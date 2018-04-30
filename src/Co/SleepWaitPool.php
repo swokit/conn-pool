@@ -6,7 +6,7 @@
  * Time: 10:55
  */
 
-namespace SwooleLib\Pool\Co;
+namespace SwooleKit\Pool\Co;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Coroutine;
@@ -14,7 +14,7 @@ use Swoole\Coroutine;
 /**
  * Class ResourcePool
  * - wait by coroutine sleep. please see @link https://wiki.swoole.com/wiki/page/784.html
- * @package SwooleLib\Pool\Co
+ * @package SwooleKit\Pool\Co
  */
 abstract class SleepWaitPool extends AbstractPool
 {

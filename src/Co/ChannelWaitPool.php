@@ -6,7 +6,7 @@
  * Time: 23:10
  */
 
-namespace SwooleLib\Pool\Co;
+namespace SwooleKit\Pool\Co;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Channel;
@@ -14,7 +14,7 @@ use Swoole\Channel;
 /**
  * Class ChannelWaitPool
  * - wait by channel. please see @link https://wiki.swoole.com/wiki/page/p-coroutine_channel.html
- * @package SwooleLib\Pool\Co
+ * @package SwooleKit\Pool\Co
  */
 abstract class ChannelWaitPool extends AbstractPool
 {

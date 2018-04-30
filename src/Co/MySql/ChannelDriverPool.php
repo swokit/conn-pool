@@ -6,14 +6,14 @@
  * Time: 下午5:23
  */
 
-namespace SwooleLib\Pool\Co\MySQL;
+namespace SwooleKit\Pool\Co\MySQL;
 
-use SwooleLib\Pool\Co\ChannelWaitPool;
+use SwooleKit\Pool\Co\ChannelWaitPool;
 use Swoole\Coroutine\Mysql;
 
 /**
  * Class ChannelDriverPool
- * @package SwooleLib\Pool\Co\MySQL
+ * @package SwooleKit\Pool\Co\MySQL
  */
 class ChannelDriverPool extends ChannelWaitPool
 {

@@ -1,9 +1,9 @@
 {
-  "name": "swoole-libs/connection-pool",
+  "name": "swoole-kit/connection-pool",
   "type": "library",
   "description": "a simple connection pool library of the php. base on swoole",
   "keywords": ["library","connection-pool"],
-  "homepage": "http://github.com/swoole-libs/connection-pool",
+  "homepage": "http://github.com/swoole-kit/connection-pool",
   "license": "MIT",
   "authors": [
     {
@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SwooleLib\\Pool\\" : "src/"
+      "SwooleKit\\Pool\\" : "src/"
     }
   },
   "suggest": {

@@ -12,8 +12,8 @@ date_default_timezone_set('Asia/Shanghai');
 
 $inhereDir = dirname(__DIR__, 2);
 $map = [
-	'SwooleLib\Pool\Test\\' => __DIR__,
-	'SwooleLib\Pool\\' => dirname(__DIR__) . '/src',
+	'SwooleKit\Pool\Test\\' => __DIR__,
+	'SwooleKit\Pool\\' => dirname(__DIR__) . '/src',
 ];
 
 spl_autoload_register(function ($class) use ($map) {
