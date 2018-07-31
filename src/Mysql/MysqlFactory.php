@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: inhere
- * Date: 2017-09-08
- * Time: 15:11
+ * Date: 2018/3/1
+ * Time: 下午5:44
  */
 
-namespace SwooleKit\Pool\MySQL;
+namespace SwooleKit\Pool\Mysql;
 
-use Swoole\Coroutine\MySQL;
-use SwooleKit\Pool\SleepWaitPool;
+use Inhere\Pool\FactoryInterface;
+use Swoole\Coroutine\Mysql;
 
 /**
- * Class CoMySQLPool2
- * @package SwooleKit\Pool\MySQL
+ * Class MysqlFactory
+ * @package SwooleKit\Pool\Mysql
  */
-class SleepDriverPool extends SleepWaitPool
+class MysqlFactory implements FactoryInterface
 {
     /**
      * @var array
@@ -53,21 +53,19 @@ class SleepDriverPool extends SleepWaitPool
     }
 
     /**
-     * 销毁资源实例
-     * @param $resource
-     * @return void
+     * @param \stdClass|mixed $obj The resource
+     * @return mixed
      */
-    public function destroy($resource)
+    public function destroy($obj)
     {
-//        unset($resource);
+        // TODO: Implement destroy() method.
     }
 
     /**
-     * 验证资源(eg. db connection)有效性
-     * @param mixed $obj
+     * @param \stdClass|mixed $obj The resource
      * @return bool
      */
-    protected function validate($obj): bool
+    public function validate($obj): bool
     {
         // TODO: Implement validate() method.
     }
