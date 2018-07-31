@@ -6,14 +6,14 @@
  * Time: 15:11
  */
 
-namespace SwooleKit\Pool\Co\Redis;
+namespace SwooleKit\Pool\Redis;
 
-use SwooleKit\Pool\Co\SuspendWaitPool;
+use SwooleKit\Pool\SuspendWaitPool;
 use Swoole\Coroutine\Redis;
 
 /**
  * Class CoRedisPool
- * @package SwooleKit\Pool\Co\Redis
+ * @package SwooleKit\Pool\Redis
  */
 class RedisPool extends SuspendWaitPool
 {

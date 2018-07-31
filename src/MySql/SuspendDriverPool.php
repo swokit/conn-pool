@@ -2,20 +2,20 @@
 /**
  * Created by PhpStorm.
  * User: inhere
- * Date: 2018/3/1
- * Time: 下午5:23
+ * Date: 2017-09-08
+ * Time: 15:11
  */
 
-namespace SwooleKit\Pool\Co\MySQL;
+namespace SwooleKit\Pool\MySQL;
 
-use SwooleKit\Pool\Co\ChannelWaitPool;
-use Swoole\Coroutine\Mysql;
+use Swoole\Coroutine\MySQL;
+use SwooleKit\Pool\SuspendWaitPool;
 
 /**
- * Class ChannelDriverPool
- * @package SwooleKit\Pool\Co\MySQL
+ * Class CoMySQLPool
+ * @package SwooleKit\Pool\MySQL
  */
-class ChannelDriverPool extends ChannelWaitPool
+class SuspendDriverPool extends SuspendWaitPool
 {
     /**
      * @var array
@@ -49,8 +49,6 @@ class ChannelDriverPool extends ChannelWaitPool
         $db = new MySQL();
         $db->connect($config);
 
-        parent::create();
-
         return $db;
     }
 
@@ -61,7 +59,7 @@ class ChannelDriverPool extends ChannelWaitPool
      */
     public function destroy($resource)
     {
-        // TODO: Implement destroy() method.
+        // unset($resource);
     }
 
     /**
@@ -71,6 +69,6 @@ class ChannelDriverPool extends ChannelWaitPool
      */
     protected function validate($obj): bool
     {
-        // TODO: Implement validate() method.
+        $obj->query('SELECT 1');
     }
 }

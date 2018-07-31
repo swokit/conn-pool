@@ -6,15 +6,16 @@
  * Time: 23:10
  */
 
-namespace SwooleKit\Pool\Co;
+namespace SwooleKit\Pool;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Channel;
 
 /**
  * Class ChannelWaitPool
- * - wait by channel. please see @link https://wiki.swoole.com/wiki/page/p-coroutine_channel.html
- * @package SwooleKit\Pool\Co
+ * - wait by channel. please see
+ * @link https://wiki.swoole.com/wiki/page/p-coroutine_channel.html
+ * @package SwooleKit\Pool
  */
 abstract class ChannelWaitPool extends AbstractPool
 {
@@ -31,7 +32,7 @@ abstract class ChannelWaitPool extends AbstractPool
 
     protected function init()
     {
-        $this->channel = new Channel($this->getMaxSize() + 10);
+        $this->channel = new Channel(100);
 
         parent::init();
     }
