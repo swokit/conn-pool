@@ -6,14 +6,14 @@
  * Time: 下午5:44
  */
 
-namespace SwooleKit\Pool\Mysql;
+namespace SwoKit\Pool\Mysql;
 
 use Inhere\Pool\FactoryInterface;
 use Swoole\Coroutine\Mysql;
 
 /**
  * Class MysqlFactory
- * @package SwooleKit\Pool\Mysql
+ * @package SwoKit\Pool\Mysql
  */
 class MysqlFactory implements FactoryInterface
 {

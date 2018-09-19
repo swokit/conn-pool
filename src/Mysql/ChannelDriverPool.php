@@ -6,16 +6,16 @@
  * Time: 下午5:23
  */
 
-namespace SwooleKit\Pool\Mysql;
+namespace SwoKit\Pool\Mysql;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Coroutine\Channel;
 use Swoole\Coroutine\MySQL;
-use SwooleKit\Pool\Exception\ChannelException;
+use SwoKit\Pool\Exception\ChannelException;
 
 /**
  * Class ChannelDriverPool
- * @package SwooleKit\Pool\Mysql
+ * @package SwoKit\Pool\Mysql
  */
 class ChannelDriverPool extends AbstractPool
 {

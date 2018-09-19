@@ -6,7 +6,7 @@
  * Time: 20:42
  */
 
-namespace SwooleKit\Pool;
+namespace SwoKit\Pool;
 
 use Inhere\Pool\AbstractPool;
 use Swoole\Timer;

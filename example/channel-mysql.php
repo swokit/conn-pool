@@ -9,7 +9,7 @@
 require dirname(__DIR__) . '/test/boot.php';
 
 go(function () {
-    $pool = new \SwooleKit\Pool\Mysql\ChannelDriverPool();
+    $pool = new \SwoKit\Pool\Mysql\ChannelDriverPool();
     $pool->setOptions([
         'db' => [
             'charset' => 'utf8',
