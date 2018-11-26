@@ -8,12 +8,12 @@
 
 namespace SwoKit\Pool;
 
-use Inhere\Pool\AbstractPool;
+use Toolkit\Pool\AbstractPool;
 use Swoole\Timer;
 
 /**
  * Class SwoolePool
- * @package Inhere\Pool
+ * @package Toolkit\Pool
  */
 abstract class SwoolePool extends AbstractPool
 {

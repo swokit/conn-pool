@@ -8,7 +8,7 @@
 
 namespace SwoKit\Pool\Mysql;
 
-use Inhere\Pool\AbstractPool;
+use Toolkit\Pool\AbstractPool;
 use Swoole\Coroutine\Channel;
 use Swoole\Coroutine\MySQL;
 use SwoKit\Pool\Exception\ChannelException;

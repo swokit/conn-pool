@@ -6,13 +6,13 @@
  * Time: 20:35
  */
 
-namespace Inhere\Pool;
+namespace Toolkit\Pool;
 
 use SwooleLib\Pool\MySQL\SuspendDriverPool;
 
 /**
  * Class PoolManager
- * @package Inhere\Pool
+ * @package Toolkit\Pool
  */
 class PoolManager
 {

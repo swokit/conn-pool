@@ -8,7 +8,7 @@
 
 namespace SwoKit\Pool\Mysql;
 
-use Inhere\Pool\FactoryInterface;
+use Toolkit\Pool\FactoryInterface;
 use Swoole\Coroutine\Mysql;
 
 /**

@@ -1,16 +1,16 @@
 # 连接池
 
+[![License](https://img.shields.io/packagist/l/swokit/connection-pool.svg?style=flat-square)](LICENSE)
+[![Php Version](https://img.shields.io/badge/php-%3E7.0-brightgreen.svg?maxAge=2592000)](https://packagist.org/packages/swokit/connection-pool)
+[![Latest Stable Version](http://img.shields.io/packagist/v/swokit/connection-pool.svg)](https://packagist.org/packages/swokit/connection-pool)
+
 > 资源池使用在 **常住进程的服务** 中才有用。比如用 swoole/workman 创建的应用
 
 使用池可实现 数据库连接池、redis连接池等，减少对服务的过多的连接/断开带来的额外资源消耗
 
 ## 项目地址
 
-- **github** https://github.com/swokit/php-connection-pool.git
-
-**注意：**
-
-- master 分支是要求 `php >= 7` 的
+- **github** https://github.com/swokit/connection-pool.git
 
 ## 安装
 

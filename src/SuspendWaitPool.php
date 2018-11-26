@@ -8,7 +8,7 @@
 
 namespace SwoKit\Pool;
 
-use Inhere\Pool\AbstractPool;
+use Toolkit\Pool\AbstractPool;
 use Swoole\Coroutine;
 
 /**

@@ -2,7 +2,10 @@
   "name": "swokit/connection-pool",
   "type": "library",
   "description": "a simple connection pool library of the php. base on swoole",
-  "keywords": ["library","connection-pool"],
+  "keywords": [
+    "library",
+    "connection-pool"
+  ],
   "homepage": "http://github.com/swokit/connection-pool",
   "license": "MIT",
   "authors": [
@@ -14,12 +17,12 @@
   ],
   "require": {
     "php": ">=7.0.0",
-    "inhere/resource-pool": "dev-master",
+    "toolkit/pool": "dev-master",
     "psr/log": "^1.0"
   },
   "autoload": {
     "psr-4": {
-      "SwoKit\\Pool\\" : "src/"
+      "SwoKit\\Pool\\": "src/"
     }
   }
 }
