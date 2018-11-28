@@ -13,7 +13,6 @@ use Swoole\Coroutine;
 use Swoole\Coroutine\Channel;
 use Swoole\Coroutine\MySQL;
 use Toolkit\Pool\AbstractPool;
-use Toolkit\Pool\FulledPoolTrait;
 
 /**
  * Class ChannelDriverPool
@@ -21,8 +20,6 @@ use Toolkit\Pool\FulledPoolTrait;
  */
 class ChannelDriverPool extends AbstractPool
 {
-    use FulledPoolTrait;
-
     /**
      * @var array
      */
@@ -46,6 +43,11 @@ class ChannelDriverPool extends AbstractPool
      * ]
      */
     private $chan;
+
+    /**
+     * @var int
+     */
+    private $busyCount = 0;
 
     /**
      * @var array
@@ -79,6 +81,26 @@ class ChannelDriverPool extends AbstractPool
         }
 
         return $config;
+    }
+
+    /**
+     * 预(创建)准备资源
+     * @param int $size
+     * @return int
+     * @throws \Exception
+     */
+    protected function prepare(int $size): int
+    {
+        if ($size <= 0) {
+            return 0;
+        }
+
+        for ($i = 0; $i < $size; $i++) {
+            $res = $this->create();
+            $this->chan->push($res);
+        }
+
+        return $size;
     }
 
     /**
@@ -126,6 +148,8 @@ class ChannelDriverPool extends AbstractPool
             }
         }
 
+        $this->busyCount++;
+
         return $db;
     }
 
@@ -141,6 +165,8 @@ class ChannelDriverPool extends AbstractPool
         if (!$this->chan->push($obj)) {
             throw new ChannelException('push resource to chan is failure!', -500);
         }
+
+        $this->busyCount--;
     }
 
     /**
@@ -210,6 +236,8 @@ class ChannelDriverPool extends AbstractPool
 
     public function clear()
     {
+        $this->busyCount = 0;
+
         if (Coroutine::getuid() === -1) {
             return;
         }
@@ -262,8 +290,16 @@ class ChannelDriverPool extends AbstractPool
     /**
      * @return int
      */
-    public function count(): int
+    public function getFreeCount(): int
     {
         return $this->chan->length();
+    }
+
+    /**
+     * @return int
+     */
+    public function getBusyCount(): int
+    {
+        return $this->busyCount;
     }
 }

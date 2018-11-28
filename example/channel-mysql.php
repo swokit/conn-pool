@@ -12,6 +12,7 @@ go(function () {
     var_dump("CID: " . \Swoole\Coroutine::getuid());
 
     $pool = new \SwoKit\Pool\Mysql\ChannelDriverPool();
+    $pool->setInitSize(3);
     $pool->setOptions([
         'db' => [
             'host' => 'localhost',
@@ -24,6 +25,9 @@ go(function () {
         ],
     ]);
 
+    // will prepare $initSize resources.
+    $pool->initPool();
+
     var_dump($pool->getMetas());
     $db = $pool->get();
 
@@ -34,6 +38,8 @@ go(function () {
     $pool->put($db);
 
     var_dump($pool->getMetas());
+
+    var_dump($pool->count());
 });
 
 \Swoole\Timer::after(5 * 1000, function () {
