@@ -9,13 +9,13 @@
 namespace SwoKit\Pool\Mysql;
 
 use Swoole\Coroutine\MySQL;
-use SwoKit\Pool\SuspendWaitPool;
+use SwoKit\Pool\YieldWaitPool;
 
 /**
- * Class CoMySQLPool
+ * Class YieldDriverPool
  * @package SwoKit\Pool\Mysql
  */
-class SuspendDriverPool extends SuspendWaitPool
+class YieldDriverPool extends YieldWaitPool
 {
     /**
      * @var array

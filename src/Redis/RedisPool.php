@@ -8,14 +8,14 @@
 
 namespace SwoKit\Pool\Redis;
 
-use SwoKit\Pool\SuspendWaitPool;
+use SwoKit\Pool\YieldWaitPool;
 use Swoole\Coroutine\Redis;
 
 /**
  * Class CoRedisPool
  * @package SwoKit\Pool\Redis
  */
-class RedisPool extends SuspendWaitPool
+class RedisPool extends YieldWaitPool
 {
     /**
      * 创建新的资源实例

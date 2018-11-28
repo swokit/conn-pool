@@ -8,15 +8,15 @@
 
 namespace SwoKit\Pool;
 
-use Toolkit\Pool\AbstractPool;
 use Swoole\Coroutine;
+use Toolkit\Pool\SPLQueuePool;
 
 /**
  * Class ResourcePool
  * - wait by coroutine sleep. please see @link https://wiki.swoole.com/wiki/page/784.html
  * @package SwoKit\Pool
  */
-abstract class SleepWaitPool extends AbstractPool
+abstract class SleepWaitPool extends SPLQueuePool
 {
     /**
      * check Interval time(ms)

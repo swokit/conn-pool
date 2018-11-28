@@ -8,10 +8,12 @@
 
 namespace SwoKit\Pool\Mysql;
 
-use Toolkit\Pool\AbstractPool;
+use SwoKit\Pool\Exception\ChannelException;
+use Swoole\Coroutine;
 use Swoole\Coroutine\Channel;
 use Swoole\Coroutine\MySQL;
-use SwoKit\Pool\Exception\ChannelException;
+use Toolkit\Pool\AbstractPool;
+use Toolkit\Pool\FulledPoolTrait;
 
 /**
  * Class ChannelDriverPool
@@ -19,6 +21,8 @@ use SwoKit\Pool\Exception\ChannelException;
  */
 class ChannelDriverPool extends AbstractPool
 {
+    use FulledPoolTrait;
+
     /**
      * @var array
      */
@@ -35,10 +39,10 @@ class ChannelDriverPool extends AbstractPool
     /**
      * @var Channel
      * [
-     *  CoroutineId0,
-     *  CoroutineId1,
-     *  CoroutineId2,
-     * ... ...
+     *  connection0,
+     *  connection1,
+     *  connection2,
+     *  ... ...
      * ]
      */
     private $chan;
@@ -56,15 +60,14 @@ class ChannelDriverPool extends AbstractPool
     {
         $this->chan = new Channel($this->maxSize);
 
-        parent::init();
+        // parent::init();
     }
 
     /**
-     * 创建新的资源实例
-     * @return mixed
+     * @return array
      * @throws \Exception
      */
-    public function create()
+    public function getDbConfig(): array
     {
         $count = \count($this->options);
 
@@ -75,6 +78,18 @@ class ChannelDriverPool extends AbstractPool
             $config = \array_values($this->options)[$index];
         }
 
+        return $config;
+    }
+
+    /**
+     * 创建新的资源实例
+     * @return mixed
+     * @throws \Exception
+     */
+    public function create()
+    {
+        $config = $this->getDbConfig();
+
         $db = new MySQL();
         if (!$db->connect($config)) {
             throw new \RuntimeException('connect to database server failure. info=' . \json_encode($config));
@@ -82,9 +97,11 @@ class ChannelDriverPool extends AbstractPool
 
         // add metadata
         $id = $this->genID($db);
+        $time = \time();
         $this->metas[$id] = [
-            'createAt' => \time(),
-            'activeAt' => \time(),
+            'createAt' => $time,
+            'activeAt' => $time,
+            'config' => $config, // record for reconnection.
         ];
 
         return $db;
@@ -96,13 +113,17 @@ class ChannelDriverPool extends AbstractPool
      */
     public function get()
     {
-        // get from channel
-        if (!$db = $this->chan->pop($this->waitTimeout / 1000)) {
+        // no conn in the chan. create new.
+        if ($this->chan->length() === 0) {
             $db = $this->create();
+        } else {
+            // get from channel
+            $db = $this->chan->pop($this->waitTimeout / 1000);
 
             // check connection
-        } elseif (!$this->validate($db)) {
-            $db = $this->create();
+            if (!$this->validate($db)) {
+                $db = $this->create();
+            }
         }
 
         return $db;
@@ -161,14 +182,27 @@ class ChannelDriverPool extends AbstractPool
             return false;
         }
 
-        // if lost connection
+        // if lost connection, reconnection it.
         if (!$obj->connected) {
-            $ok = $obj->connect($obj->serverInfo);
+            return $this->reconnection($obj);
+        }
 
-            if (!$ok) {
-                $this->destroy($obj);
-                return false;
-            }
+        return true;
+    }
+
+    /**
+     * reconnection to DB server
+     * @param mixed|MySQL $obj
+     * @return bool
+     */
+    public function reconnection($obj): bool
+    {
+        $resId = $this->genID($obj);
+        $info = $this->getMeta($resId);
+
+        if (!$obj->connect($info)) {
+            $this->destroy($obj);
+            return false;
         }
 
         return true;
@@ -176,21 +210,21 @@ class ChannelDriverPool extends AbstractPool
 
     public function clear()
     {
+        if (Coroutine::getuid() === -1) {
+            return;
+        }
+
+        // empty
+        if ($this->chan->length() === 0) {
+            return;
+        }
+
         $timeout = $this->waitTimeout / 1000;
         while ($db = $this->chan->pop($timeout)) {
             $this->destroy($db);
         }
 
         $this->chan->close();
-    }
-
-    /**
-     * 等待并返回可用资源
-     * @return bool|mixed
-     */
-    protected function wait()
-    {
-        // TODO: Implement wait() method.
     }
 
     /**
@@ -223,5 +257,13 @@ class ChannelDriverPool extends AbstractPool
     public function hasWaiting(): bool
     {
         return $this->waitingCount() > 0;
+    }
+
+    /**
+     * @return int
+     */
+    public function count(): int
+    {
+        return $this->chan->length();
     }
 }

@@ -9,19 +9,34 @@
 require dirname(__DIR__) . '/test/boot.php';
 
 go(function () {
+    var_dump("CID: " . \Swoole\Coroutine::getuid());
+
     $pool = new \SwoKit\Pool\Mysql\ChannelDriverPool();
     $pool->setOptions([
         'db' => [
+            'host' => 'localhost',
+            'port' => 13306,
             'charset' => 'utf8',
-            'port' => 3306,
             'timeout' => 3,
+            'user' => 'root',
+            'password' => '123456',
+            'database' => 'mysql',
         ],
     ]);
 
+    var_dump($pool->getMetas());
     $db = $pool->get();
 
-    $ret = $db->query('select * from tuserreport limit 1');
-    // var_dump($ret);
+    var_dump($pool->getMetas());
+    $ret = $db->query('select * from `db` limit 1');
+    var_dump("result:", $ret);
 
     $pool->put($db);
+
+    var_dump($pool->getMetas());
+});
+
+\Swoole\Timer::after(5 * 1000, function () {
+    echo "end\n";
+    swoole_event_exit();
 });

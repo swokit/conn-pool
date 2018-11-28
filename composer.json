@@ -24,5 +24,11 @@
     "psr-4": {
       "SwoKit\\Pool\\": "src/"
     }
+  },
+  "repositories": {
+    "packagist": {
+      "type": "composer",
+      "url": "https://packagist.phpcomposer.com"
+    }
   }
 }

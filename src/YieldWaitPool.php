@@ -8,15 +8,15 @@
 
 namespace SwoKit\Pool;
 
-use Toolkit\Pool\AbstractPool;
 use Swoole\Coroutine;
+use Toolkit\Pool\SPLQueuePool;
 
 /**
- * Class ResourcePool
+ * Class YieldWaitPool - switch coroutine by Coroutine::yield()
  * - wait by coroutine switch. please see @link https://wiki.swoole.com/wiki/page/773.html
  * @package SwoKit\Pool
  */
-abstract class SuspendWaitPool extends AbstractPool
+abstract class YieldWaitPool extends SPLQueuePool
 {
     /**
      * @var \SplQueue
@@ -47,8 +47,8 @@ abstract class SuspendWaitPool extends AbstractPool
         // 保存等待的协程ID
         $this->waitingQueue->push($coId);
 
-        // 无空闲资源可用， 挂起协程
-        Coroutine::suspend($coId);
+        // 无空闲资源可用，挂起当前协程
+        Coroutine::yield();// alias Coroutine::suspend();
 
         // 恢复后， 返回可用资源
         return $this->getFreeQueue()->pop();
