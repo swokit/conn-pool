@@ -6,7 +6,7 @@
  * Time: 10:55
  */
 
-namespace SwoKit\Pool;
+namespace Swokit\Pool;
 
 use Swoole\Coroutine;
 use Toolkit\Pool\SPLQueuePool;
@@ -14,7 +14,7 @@ use Toolkit\Pool\SPLQueuePool;
 /**
  * Class YieldWaitPool - switch coroutine by Coroutine::yield()
  * - wait by coroutine switch. please see @link https://wiki.swoole.com/wiki/page/773.html
- * @package SwoKit\Pool
+ * @package Swokit\Pool
  */
 abstract class YieldWaitPool extends SPLQueuePool
 {

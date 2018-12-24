@@ -6,14 +6,14 @@
  * Time: 13:51
  */
 
-namespace SwoKit\Pool\Test;
+namespace Swokit\Pool\Test;
 
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class MysqlChannelPoolTest
- * @covers \SwoKit\Pool\Mysql\ChannelDriverPool
- * @package SwoKit\Pool\Test
+ * @covers \Swokit\Pool\Mysql\ChannelDriverPool
+ * @package Swokit\Pool\Test
  */
 class MysqlChannelPoolTest extends TestCase
 {
@@ -29,7 +29,7 @@ class MysqlChannelPoolTest extends TestCase
         $cid = go(function () {
             // var_dump("CID: " . \Swoole\Coroutine::getuid());
 
-            $pool = new \SwoKit\Pool\Mysql\ChannelDriverPool();
+            $pool = new \Swokit\Pool\Mysql\ChannelDriverPool();
             $pool->setOptions([
                 'db' => [
                     'host' => 'localhost',

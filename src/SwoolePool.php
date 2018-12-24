@@ -6,10 +6,10 @@
  * Time: 20:42
  */
 
-namespace SwoKit\Pool;
+namespace Swokit\Pool;
 
-use Toolkit\Pool\AbstractPool;
 use Swoole\Timer;
+use Toolkit\Pool\AbstractPool;
 
 /**
  * Class SwoolePool

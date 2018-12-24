@@ -11,7 +11,7 @@ require dirname(__DIR__) . '/test/boot.php';
 go(function () {
     var_dump("CID: " . \Swoole\Coroutine::getuid());
 
-    $pool = new \SwoKit\Pool\Mysql\ChannelDriverPool();
+    $pool = new \Swokit\Pool\Mysql\ChannelDriverPool();
     $pool->setInitSize(3);
     $pool->setOptions([
         'db' => [

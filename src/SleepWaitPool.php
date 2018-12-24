@@ -6,7 +6,7 @@
  * Time: 10:55
  */
 
-namespace SwoKit\Pool;
+namespace Swokit\Pool;
 
 use Swoole\Coroutine;
 use Toolkit\Pool\SPLQueuePool;
@@ -14,7 +14,7 @@ use Toolkit\Pool\SPLQueuePool;
 /**
  * Class ResourcePool
  * - wait by coroutine sleep. please see @link https://wiki.swoole.com/wiki/page/784.html
- * @package SwoKit\Pool
+ * @package Swokit\Pool
  */
 abstract class SleepWaitPool extends SPLQueuePool
 {

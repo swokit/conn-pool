@@ -6,14 +6,14 @@
  * Time: 15:11
  */
 
-namespace SwoKit\Pool\Redis;
+namespace Swokit\Pool\Redis;
 
-use SwoKit\Pool\YieldWaitPool;
+use Swokit\Pool\YieldWaitPool;
 use Swoole\Coroutine\Redis;
 
 /**
  * Class CoRedisPool
- * @package SwoKit\Pool\Redis
+ * @package Swokit\Pool\Redis
  */
 class RedisPool extends YieldWaitPool
 {

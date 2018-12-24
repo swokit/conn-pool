@@ -6,13 +6,14 @@
  * Time: 20:35
  */
 
-namespace Toolkit\Pool;
+namespace Swokit\Pool;
 
-use SwooleLib\Pool\MySQL\SuspendDriverPool;
+use Swokit\Pool\MySQL\YieldDriverPool;
+use Toolkit\Pool\PoolInterface;
 
 /**
  * Class PoolManager
- * @package Toolkit\Pool
+ * @package Swokit\Pool
  */
 class PoolManager
 {
@@ -61,7 +62,7 @@ class PoolManager
     public function init()
     {
         foreach ($this->configs as $config) {
-            $pool = new SuspendDriverPool($config);
+            $pool = new YieldDriverPool($config);
             $pool->initPool();
 
             $this->pools[$pool->getName()] = $pool;

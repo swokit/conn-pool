@@ -6,14 +6,14 @@
  * Time: 15:11
  */
 
-namespace SwoKit\Pool\Mysql;
+namespace Swokit\Pool\Mysql;
 
+use Swokit\Pool\YieldWaitPool;
 use Swoole\Coroutine\MySQL;
-use SwoKit\Pool\YieldWaitPool;
 
 /**
  * Class YieldDriverPool
- * @package SwoKit\Pool\Mysql
+ * @package Swokit\Pool\Mysql
  */
 class YieldDriverPool extends YieldWaitPool
 {

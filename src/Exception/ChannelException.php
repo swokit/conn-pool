@@ -6,11 +6,11 @@
  * Time: 下午3:11
  */
 
-namespace SwoKit\Pool\Exception;
+namespace Swokit\Pool\Exception;
 
 /**
  * Class ChannelException
- * @package SwoKit\Pool\Exception
+ * @package Swokit\Pool\Exception
  */
 class ChannelException extends \RuntimeException
 {
