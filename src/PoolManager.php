@@ -59,7 +59,7 @@ class PoolManager
         }
     }
 
-    public function init()
+    public function init(): void
     {
         foreach ($this->configs as $config) {
             $pool = new YieldDriverPool($config);
@@ -86,14 +86,14 @@ class PoolManager
      * @param string $poolName
      * @param mixed $resource
      */
-    public function put(string $poolName, $resource)
+    public function put(string $poolName, $resource): void
     {
         if (isset($this->pools[$poolName])) {
             $this->pools[$poolName]->put($resource);
         }
     }
 
-    public function clear(string $poolName = null)
+    public function clear(string $poolName = null): void
     {
         if ($poolName && isset($this->pools[$poolName])) {
             $this->pools[$poolName]->clear();
@@ -108,7 +108,7 @@ class PoolManager
      * @param string $poolName
      * @return PoolInterface|null
      */
-    public function getPool(string $poolName)
+    public function getPool(string $poolName): ?PoolInterface
     {
         return $this->pools[$poolName] ?? null;
     }

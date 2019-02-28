@@ -24,7 +24,7 @@ class MysqlChannelPoolTest extends TestCase
         });
     }
 
-    public function testQuery()
+    public function testQuery(): void
     {
         $cid = go(function () {
             // var_dump("CID: " . \Swoole\Coroutine::getuid());
@@ -46,7 +46,7 @@ class MysqlChannelPoolTest extends TestCase
 
             // var_dump($pool->getMetas());
             $ret = $db->query('select * from `db` limit 1');
-            var_dump("result:", $ret);
+            var_dump('result:', $ret);
 
             $pool->put($db);
 

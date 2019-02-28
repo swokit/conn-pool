@@ -58,7 +58,7 @@ class ChannelDriverPool extends AbstractPool
         'busy' => 0,
     ];
 
-    protected function init()
+    protected function init(): void
     {
         $this->chan = new Channel($this->maxSize);
 
@@ -156,7 +156,7 @@ class ChannelDriverPool extends AbstractPool
     /**
      * @param mixed $obj
      */
-    public function put($obj)
+    public function put($obj): void
     {
         // update active time
         $resId = $this->genID($obj);
@@ -174,7 +174,7 @@ class ChannelDriverPool extends AbstractPool
      * @param mixed|MySQL $obj
      * @return void
      */
-    public function destroy($obj)
+    public function destroy($obj): void
     {
         // del metadata
         $id = $this->genID($obj);
@@ -234,7 +234,7 @@ class ChannelDriverPool extends AbstractPool
         return true;
     }
 
-    public function clear()
+    public function clear(): void
     {
         $this->busyCount = 0;
 

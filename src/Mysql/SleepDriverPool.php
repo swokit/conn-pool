@@ -57,7 +57,7 @@ class SleepDriverPool extends SleepWaitPool
      * @param $resource
      * @return void
      */
-    public function destroy($resource)
+    public function destroy($resource): void
     {
 //        unset($resource);
     }

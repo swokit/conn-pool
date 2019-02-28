@@ -9,7 +9,7 @@
 require dirname(__DIR__) . '/test/boot.php';
 
 go(function () {
-    var_dump("CID: " . \Swoole\Coroutine::getuid());
+    var_dump('CID: ' . \Swoole\Coroutine::getuid());
 
     $pool = new \Swokit\Pool\Mysql\ChannelDriverPool();
     $pool->setInitSize(3);
@@ -33,7 +33,7 @@ go(function () {
 
     var_dump($pool->getMetas());
     $ret = $db->query('select * from `db` limit 1');
-    var_dump("result:", $ret);
+    var_dump('result:', $ret);
 
     $pool->put($db);
 

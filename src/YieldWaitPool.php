@@ -29,7 +29,7 @@ abstract class YieldWaitPool extends SPLQueuePool
      */
     private $waitingQueue;
 
-    protected function init()
+    protected function init(): void
     {
         $this->waitingQueue = new \SplQueue();
 
@@ -57,7 +57,7 @@ abstract class YieldWaitPool extends SPLQueuePool
     /**
      * {@inheritdoc}
      */
-    public function put($resource)
+    public function put($resource): void
     {
         parent::put($resource);
 

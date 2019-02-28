@@ -36,7 +36,7 @@ class RedisPool extends YieldWaitPool
      * @param $resource
      * @return void
      */
-    public function destroy($resource)
+    public function destroy($resource): void
     {
         // unset($resource);
     }

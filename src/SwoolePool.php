@@ -30,7 +30,7 @@ abstract class SwoolePool extends AbstractPool
     /**
      * pool checker
      */
-    public function initTimers()
+    public function initTimers(): void
     {
         // 空闲时间超时检查
         $this->timers[] = Timer::tick($this->checkInterval * 1000, function () {
@@ -38,7 +38,7 @@ abstract class SwoolePool extends AbstractPool
         });
     }
 
-    public function clear()
+    public function clear(): void
     {
         parent::clear();
 
