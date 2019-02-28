@@ -32,11 +32,11 @@ class MysqlChannelPoolTest extends TestCase
             $pool = new \Swokit\Pool\Mysql\ChannelDriverPool();
             $pool->setOptions([
                 'db' => [
-                    'host' => 'localhost',
-                    'port' => 13306,
-                    'charset' => 'utf8',
-                    'timeout' => 3,
-                    'user' => 'root',
+                    'host'     => 'localhost',
+                    'port'     => 13306,
+                    'charset'  => 'utf8',
+                    'timeout'  => 3,
+                    'user'     => 'root',
                     'password' => '123456',
                     'database' => 'mysql',
                 ],

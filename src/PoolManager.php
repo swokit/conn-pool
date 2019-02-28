@@ -84,7 +84,7 @@ class PoolManager
 
     /**
      * @param string $poolName
-     * @param mixed $resource
+     * @param mixed  $resource
      */
     public function put(string $poolName, $resource): void
     {

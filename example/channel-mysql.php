@@ -15,11 +15,11 @@ go(function () {
     $pool->setInitSize(3);
     $pool->setOptions([
         'db' => [
-            'host' => 'localhost',
-            'port' => 13306,
-            'charset' => 'utf8',
-            'timeout' => 3,
-            'user' => 'root',
+            'host'     => 'localhost',
+            'port'     => 13306,
+            'charset'  => 'utf8',
+            'timeout'  => 3,
+            'user'     => 'root',
             'password' => '123456',
             'database' => 'mysql',
         ],

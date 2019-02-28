@@ -30,9 +30,9 @@ abstract class SleepWaitPool extends SPLQueuePool
      */
     protected function wait()
     {
-        $timer = 0;
-        $timeout = $this->getWaitTimeout();
-        $interval = $this->checkInterval;
+        $timer          = 0;
+        $timeout        = $this->getWaitTimeout();
+        $interval       = $this->checkInterval;
         $intervalSecond = $this->checkInterval / 1000;
 
         while ($timer <= $timeout) {

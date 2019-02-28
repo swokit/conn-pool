@@ -11,9 +11,9 @@ error_reporting(E_ALL | E_STRICT);
 date_default_timezone_set('Asia/Shanghai');
 
 $inhereDir = dirname(__DIR__, 2);
-$map = [
+$map       = [
     'Swokit\Pool\Test\\' => __DIR__,
-    'Swokit\Pool\\' => dirname(__DIR__) . '/src',
+    'Swokit\Pool\\'      => dirname(__DIR__) . '/src',
 ];
 
 spl_autoload_register(function ($class) use ($map) {

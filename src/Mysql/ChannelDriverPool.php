@@ -25,9 +25,9 @@ class ChannelDriverPool extends AbstractPool
      */
     protected $options = [
         'db1' => [
-            'host' => 'mysql',
-            'port' => 3306,
-            'user' => 'root',
+            'host'     => 'mysql',
+            'port'     => 3306,
+            'user'     => 'root',
             'password' => 'password',
             'database' => 'my_test',
         ],
@@ -54,8 +54,8 @@ class ChannelDriverPool extends AbstractPool
      */
     private $stats = [
         'total' => 0,
-        'free' => 0,
-        'busy' => 0,
+        'free'  => 0,
+        'busy'  => 0,
     ];
 
     protected function init(): void
@@ -76,7 +76,7 @@ class ChannelDriverPool extends AbstractPool
         if ($count === 1) {
             $config = \array_values($this->options)[0];
         } else {
-            $index = \random_int(0, $count - 1);
+            $index  = \random_int(0, $count - 1);
             $config = \array_values($this->options)[$index];
         }
 
@@ -118,12 +118,12 @@ class ChannelDriverPool extends AbstractPool
         }
 
         // add metadata
-        $id = $this->genID($db);
-        $time = \time();
+        $id               = $this->genID($db);
+        $time             = \time();
         $this->metas[$id] = [
             'createAt' => $time,
             'activeAt' => $time,
-            'config' => $config, // record for reconnection.
+            'config'   => $config, // record for reconnection.
         ];
 
         return $db;
@@ -159,7 +159,7 @@ class ChannelDriverPool extends AbstractPool
     public function put($obj): void
     {
         // update active time
-        $resId = $this->genID($obj);
+        $resId                           = $this->genID($obj);
         $this->metas[$resId]['activeAt'] = \time();
 
         if (!$this->chan->push($obj)) {
@@ -193,7 +193,7 @@ class ChannelDriverPool extends AbstractPool
      */
     protected function validate($obj): bool
     {
-        $time = \time();
+        $time  = \time();
         $resId = $this->genID($obj);
 
         if (!$meta = $this->getMeta($resId)) {
@@ -224,7 +224,7 @@ class ChannelDriverPool extends AbstractPool
     public function reconnection($obj): bool
     {
         $resId = $this->genID($obj);
-        $info = $this->getMeta($resId);
+        $info  = $this->getMeta($resId);
 
         if (!$obj->connect($info)) {
             $this->destroy($obj);

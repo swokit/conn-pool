@@ -22,9 +22,9 @@ class YieldDriverPool extends YieldWaitPool
      */
     protected $options = [
         'db1' => [
-            'host' => 'mysql',
-            'port' => 3306,
-            'user' => 'root',
+            'host'     => 'mysql',
+            'port'     => 3306,
+            'user'     => 'root',
             'password' => 'password',
             'database' => 'my_test',
         ],
@@ -42,7 +42,7 @@ class YieldDriverPool extends YieldWaitPool
         if ($count === 1) {
             $config = \array_values($this->options)[0];
         } else {
-            $index = \random_int(0, $count - 1);
+            $index  = \random_int(0, $count - 1);
             $config = \array_values($this->options)[$index];
         }
 
